@@ -66,5 +66,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LED_SCROLL_LOCK_PIN A13
 #define LED_PIN_ON_STATE 0
 
-#define AUTO_SHIFT_TIMEOUT 150
-
+#define AUTO_SHIFT_TIMEOUT 145
