@@ -6,7 +6,10 @@
 
 enum custom_keycodes {
     CM_WLGT = SAFE_RANGE,
+    CM_TGDP
 };
+
+bool display_enabled = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -18,6 +21,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 // when keycode is released
             }
             return true;
+        case CM_TGDP:
+            if (record->event.pressed) {
+                // when keycode is pressed
+                display_enabled = !display_enabled;
+                oled_clear();
+            } else {
+                // when keycode is released
+            }
+            return true;
         default:
             return true;
     }
@@ -25,36 +37,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef OLED_DRIVER_ENABLE
 void oled_task_user(void) {
-    // Host Keyboard Layer Status
-    oled_write_P(PSTR("Layer: "), false);
-
-    switch (get_highest_layer(layer_state)) {
-        case _QWERTZ:
-            oled_write_P(PSTR("Default\n"), false);
-            break;
-        case _SET:
-            oled_write_P(PSTR("Settings\n"), false);
-            break;
-        default:
-            // Or use the write_ln shortcut over adding '\n' to the end of your string
-            oled_write_ln_P(PSTR("Undefined"), false);
-    }
-
-    oled_write_P(PSTR("Auto-Shift:\n"), false);
-    if (get_autoshift_state())
+    if (display_enabled)
     {
-        //oled_write_P(PSTR("- Enabled\n"), false);
+        // Host Keyboard Layer Status
+        oled_write_P(PSTR("Layer: "), false);
 
-        char autoshift_timeout_str_ms[6];
-        snprintf(autoshift_timeout_str_ms, 6, "%d", get_autoshift_timeout());
+        switch (get_highest_layer(layer_state)) {
+            case _QWERTZ:
+                oled_write_P(PSTR("Default\n"), false);
+                break;
+            case _SET:
+                oled_write_P(PSTR("Settings\n"), false);
+                break;
+            default:
+                // Or use the write_ln shortcut over adding '\n' to the end of your string
+                oled_write_ln_P(PSTR("Undefined"), false);
+        }
 
-        oled_write_P(PSTR("- "), false);
-        oled_write_P(PSTR(autoshift_timeout_str_ms), false);
-        oled_write_P(PSTR(" ms\n"), false);
-    }
-    else
-    {
-        oled_write_P(PSTR("- Disabled\n"), false);
+        oled_write_P(PSTR("Auto-Shift:\n"), false);
+        if (get_autoshift_state())
+        {
+            //oled_write_P(PSTR("- Enabled\n"), false);
+
+            char autoshift_timeout_str_ms[6];
+            snprintf(autoshift_timeout_str_ms, 6, "%d", get_autoshift_timeout());
+
+            oled_write_P(PSTR("- "), false);
+            oled_write_P(PSTR(autoshift_timeout_str_ms), false);
+            oled_write_P(PSTR(" ms\n"), false);
+        }
+        else
+        {
+            oled_write_P(PSTR("- Disabled\n"), false);
+        }
     }
 }
 #endif
@@ -71,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_SET] = LAYOUT(
                                                                                              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   RESET,   KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   RESET,   KC_TRNS, KC_TRNS,   KC_TRNS, CM_TGDP, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,            KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                            KC_TRNS, KC_TRNS, KC_TRNS,

@@ -9,6 +9,8 @@ Hardware Availability:
 
     qmk compile -kb cherrystreamoled/teensy_32 -km default
 
+If it's not compiling, don't forget to run `make git-submodules` !
+
 Thanks to:
 * [QMK](https://github.com/qmk/qmk_firmware)
 * [Frank Adams for your great work](https://www.instructables.com/How-to-Make-a-USB-Laptop-Keyboard-Controller/)
@@ -21,5 +23,3 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 <img src="https://github.com/Metaln00b/Teensy3.2-CherryStream-QMK/blob/master/engineering_files/pictures/cherry-oled.jpeg" width="250">
 <img src="https://github.com/Metaln00b/Teensy3.2-CherryStream-QMK/blob/master/engineering_files/pictures/cherry-wiring.jpeg" width="250">
 <img src="https://github.com/Metaln00b/Teensy3.2-CherryStream-QMK/blob/master/engineering_files/pictures/cherry-wiring-2.jpeg" width="250">
-
-If it's not compiling, don't forget to run `make git-submodules`!
