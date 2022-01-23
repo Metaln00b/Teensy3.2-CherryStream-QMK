@@ -21,4 +21,4 @@ DEFAULT_FOLDER = cherrystream/teensy_32
 #LAYOUTS = LAYOUT_fullsize_iso
 
 AUTO_SHIFT_ENABLE = yes
-OLED_DRIVER_ENABLE = yes
+OLED_ENABLE = yes

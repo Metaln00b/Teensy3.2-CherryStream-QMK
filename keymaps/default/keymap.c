@@ -35,8 +35,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 };
 
-#ifdef OLED_DRIVER_ENABLE
-void oled_task_user(void) {
+#ifdef OLED_ENABLE
+bool oled_task_user(void) {
     if (display_enabled)
     {
         // Host Keyboard Layer Status
@@ -60,7 +60,7 @@ void oled_task_user(void) {
             //oled_write_P(PSTR("- Enabled\n"), false);
 
             char autoshift_timeout_str_ms[6];
-            snprintf(autoshift_timeout_str_ms, 6, "%d", get_autoshift_timeout());
+            snprintf(autoshift_timeout_str_ms, 6, "%d", get_generic_autoshift_timeout());
 
             oled_write_P(PSTR("- "), false);
             oled_write_P(PSTR(autoshift_timeout_str_ms), false);
@@ -71,6 +71,7 @@ void oled_task_user(void) {
             oled_write_P(PSTR("- Disabled\n"), false);
         }
     }
+    return false;
 }
 #endif
 

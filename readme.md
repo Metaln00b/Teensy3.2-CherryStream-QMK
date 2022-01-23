@@ -2,14 +2,14 @@
 
 Custom handwired cherry stream keyboard.
 
-QMK-Version: 0.13.38  
+QMK-Version: 0.15.16
 Keyboard Maintainer: Metaln00b  
 Hardware Supported: Teensy 3.2  
 Hardware Availability: 
 
     qmk compile -kb cherrystreamoled/teensy_32 -km default
 
-If it's not compiling, don't forget to run `make git-submodules` !
+If it's not compiling, don't forget to run `make git-submodule` !
 
 Thanks to:
 * [QMK](https://github.com/qmk/qmk_firmware)
