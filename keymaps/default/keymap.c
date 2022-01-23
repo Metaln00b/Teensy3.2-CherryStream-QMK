@@ -23,7 +23,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 #ifdef OLED_DRIVER_ENABLE
-void oled_task_user(void) {
+bool oled_task_user(void) {
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
 
@@ -55,6 +55,8 @@ void oled_task_user(void) {
     {
         oled_write_P(PSTR("- Disabled\n"), false);
     }
+
+    return false;
 }
 #endif
 
