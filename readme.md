@@ -2,7 +2,7 @@
 
 Custom handwired cherry stream keyboard.
 
-QMK-Version: 0.13.38
+QMK-Version: 0.13.38  
 Keyboard Maintainer: Metaln00b  
 Hardware Supported: Teensy 3.2  
 Hardware Availability: 
